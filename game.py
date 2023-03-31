@@ -23,24 +23,14 @@ class Game:
         self.sound = Sound(bg_music="sounds/startrek.wav")
         self.scoreboard = Scoreboard(game=self)
 
-        # Walls and Powerpills
-        
-        powerpills = Group()
-        shield = Group()
-        portal = Group()
-
-        # self.maze = Maze(game=self, file="images/blank_maze.png")
         self.maze = Maze(game=self)
         self.ghosts = Ghosts(game=self)
-        self.fruit = Fruit(game=self)
         self.pacman = Pacman(game=self)
-        # self.settings.initialize_speed_settings()
 
     def restart(self): pass
 
     def handle_events(self):
         #TODO handle Pacman movement  -- ghosts move by themselves
-
         for event in pg.event.get():
             if event.type == pg.QUIT: self.game_over()
 
@@ -50,14 +40,13 @@ class Game:
         sys.exit()
 
     def play(self):
-        self.sound.play_bg()
+        # self.sound.play_bg()
         while True:
             self.handle_events()
             self.screen.fill(self.settings.bg_color)
             self.maze.update()
             self.ghosts.update()
             self.pacman.update()
-            self.fruit.update()
             # self.scoreboard.update()
             pg.display.flip()
 

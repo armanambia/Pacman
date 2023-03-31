@@ -4,15 +4,9 @@ class Settings():
     def __init__(self):
         """Initialize the game's settings."""
         # Screen settings
-        self.screen_width = 1200
-        self.screen_height = 800
-        self.bg_color = (40, 40, 40)
-        
-# # TODO: test laser with a really wide laser
-        self.laser_width = 5
-        self.laser_height = 30
-        self.laser_color = 255, 0, 0
-        self.lasers_every = 10           # change to 1 to see faster lasers
+        self.screen_width = 598 # 46 x 13
+        self.screen_height = 663 # 51 x 13
+        self.bg_color = (0, 0, 0)
 
         self.aliens_shoot_every = 120    # about every 2 seconds at 60 fps
         self.alien_points = 50
