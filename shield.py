@@ -5,12 +5,14 @@ class Shield(Sprite):
     def __init__(self, game):
         super(Shield, self).__init__()
         self.screen = game.screen
-        self.size = (7, 7)
+        self.size = (5, 5)
         self.image = pygame.image.load('images/shield.png')
         self.image = pygame.transform.scale(self.image, (self.size[0], self.size[1]))
         self.game = game
         
-        self.rect = self.image.get_rect()        
+        self.rect = self.image.get_rect() 
+        self.rect.x = 5
+        self.rect.y = 5       
 
     def update(self): pass
     

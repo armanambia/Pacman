@@ -5,7 +5,8 @@ class Barrier(Sprite):
     def __init__(self, game):
         super(Barrier, self).__init__()
         self.screen = game.screen
-        self.size = (10, 10)
+        self.settings = game.settings
+        self.size = (self.settings.bar_size, self.settings.bar_size)
         self.image = pygame.image.load('images/block.png')
         self.image = pygame.transform.scale(self.image, (self.size[0], self.size[1]))
         self.game = game

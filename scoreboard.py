@@ -19,8 +19,11 @@ class Scoreboard:
         self.prep_score()
 
     def increment_score(self): 
-        self.score += self.settings.alien_points
+        self.score += self.settings.fruit_points
         self.prep_score()
+    
+    def next_level(self):
+        self.level += 1
 
     def prep_score(self): 
         score_str = str(self.score)
@@ -40,4 +43,5 @@ class Scoreboard:
         self.draw()
 
     def draw(self): 
-        self.screen.blit(self.score_image, self.score_rect)
+        # self.screen.blit(self.score_image, self.score_rect)
+        pass

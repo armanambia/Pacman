@@ -4,11 +4,14 @@ from pygame.sprite import Sprite
 class Fruit(Sprite):
     def __init__(self, game):
         super(Fruit, self).__init__()
+        self.game = game
+        self.settings = game.settings
         self.screen = game.screen
-        self.size = (7, 7)
+
+        self.size = (self.settings.frt_size, self.settings.frt_size)
         self.image = pygame.image.load('images/fruit.png')
         self.image = pygame.transform.scale(self.image, (self.size[0], self.size[1]))
-        self.game = game
+        
         
         self.rect = self.image.get_rect()        
 
