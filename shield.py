@@ -4,6 +4,7 @@ from pygame.sprite import Sprite
 class Shield(Sprite):
     def __init__(self, game):
         super(Shield, self).__init__()
+        self.time = pygame.time.get_ticks()
         self.screen = game.screen
         self.size = (5, 5)
         self.image = pygame.image.load('images/shield.png')
@@ -17,4 +18,5 @@ class Shield(Sprite):
     def update(self): pass
     
     def draw(self):
-        self.screen.blit(self.image, self.rect)
+        if pygame.time.get_ticks() - self.time < 3000:
+            self.screen.blit(self.image, self.rect)

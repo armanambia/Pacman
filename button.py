@@ -5,6 +5,7 @@ class Button():
         self.game = game
         self.screen = self.game.screen
         self.screen_rect = self.screen.get_rect()
+        self.msg = msg
 
         # Set the dimensions and properties of the button.
         self.width, self.height = 200, 50
@@ -20,6 +21,13 @@ class Button():
 
         # The button message needs to be prepped only once.
         self.prep_msg(msg)
+
+    def check_hover(self, mouse_x, mouse_y):
+        if self.rect.collidepoint(mouse_x, mouse_y):
+            self.button_color = (31, 55, 224)
+        else:
+            self.button_color = (31, 105, 224)
+        self.prep_msg(self.msg)
 
     def prep_msg(self, msg):
         self.msg_image = self.font.render(msg, True, self.text_color,

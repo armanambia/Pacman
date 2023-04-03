@@ -3,7 +3,6 @@ import pygame as pg
 from maze import Maze
 from pacman import Pacman
 from ghosts import Ghosts
-from fruit import Fruit
 from settings import Settings
 from sound import Sound
 from scoreboard import Scoreboard
@@ -77,12 +76,23 @@ class Game:
             elif event.type == pg.MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = pg.mouse.get_pos()
                 self.check_buttons(mouse_x, mouse_y)
+            elif event.type == pg.MOUSEMOTION:
+                mouse_x, mouse_y = pg.mouse.get_pos()
+                self.check_hover(mouse_x, mouse_y)
     
     def game_over(self):
-        # self.sound.gameover()
+        self.sound.gameover()
         self.scoreboard.update_disk()
         pg.quit()
         sys.exit()
+
+    def check_hover(self, mouse_x, mouse_y):
+        if not self.settings.game_active:
+            if not self.settings.hs_active:
+                self.hs_button.check_hover(mouse_x, mouse_y)
+                self.play_button.check_hover(mouse_x, mouse_y)
+            else:
+                self.back_button.check_hover(mouse_x, mouse_y)
 
     def check_buttons(self, mouse_x, mouse_y):
         if not self.settings.game_active:

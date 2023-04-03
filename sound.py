@@ -7,9 +7,10 @@ class Sound:
         pg.mixer.init()
         self.bg_music = "sounds/background.wav"
         pg.mixer.music.set_volume(0.1)
-        gameover_sound = pg.mixer.Sound('sounds/gameover.wav')
+        self.gameover_sound = pg.mixer.Sound('sounds/gameover.wav')
         self.pacman_start = 'sounds/pacmanstart.wav'
         pg.mixer.music.load(self.pacman_start)
+        self.eat_sound = pg.mixer.Sound('sounds/eat.wav')
     
     def play_start(self):
         pg.mixer.music.play(-1, 0)
@@ -23,8 +24,10 @@ class Sound:
     def stop_bg(self):
         pg.mixer.music.stop()
 
+    def eat(self):
+        pg.mixer.Sound.play(self.eat_sound)
+
     def gameover(self):
         self.stop_bg() 
-        pg.mixer.music.load('sounds/gameover.wav')
-        self.play_bg()
+        pg.mixer.Sound.play(self.gameover_sound)
         time.sleep(2.8)

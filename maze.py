@@ -6,7 +6,7 @@ from portal import Portal
 from shield import Shield
 from vector import Vector
 from powerpill import Powerpill
-
+from special import Special
 
 class Maze:
     def __init__(self, game):
@@ -15,6 +15,8 @@ class Maze:
         self.barriers = Group()
         self.fruits = Group()
         self.pills = Group()
+        self.specials = Group()
+        self.parent_specials = Group()
         self.parent_pills = Group()
         self.parent_fruits = Group()
         self.shields = Group()
@@ -34,6 +36,8 @@ class Maze:
             e.draw()
         for e in self.pills:
             e.draw()
+        for e in self.specials:
+            e.draw()
         for e in self.portals:
             e.draw()
 
@@ -51,17 +55,24 @@ class Maze:
                 self.pac_mov_col(shield)
         for fruit in self.fruits:
             if pg.sprite.collide_rect(self.game.pacman, fruit):
+                self.game.sound.eat()
                 (self.fruits).remove(fruit)
                 self.game.scoreboard.increment_score()
         for pill in self.pills:
             if pg.sprite.collide_rect(self.game.pacman, pill):
                 (self.pills).remove(pill)
                 self.game.scoreboard.increment_score("pill")
-        if not self.fruits and not self.pills:
+        for special in self.specials:
+            if pg.sprite.collide_rect(self.game.pacman, special):
+                (self.specials).remove(special)
+                self.game.scoreboard.increment_score("special")
+        if not self.fruits and not self.pills and not self.specials:
             self.fruits = self.parent_fruits.copy()
             self.pills = self.parent_pills.copy()
+            self.specials = self.parent_specials.copy()
             self.game.scoreboard.next_level()
             self.game.pacman.init_position()
+            self.game.settings.increase_difficulty()
     
     def pac_por_col(self, portal):
         if not self.game.pacman.portal:
@@ -132,6 +143,12 @@ class Maze:
                     new_pill.rect.y += 13 * off_vert
                     self.pills.add(new_pill)
                     self.parent_pills.add(new_pill)
+                elif e == 's':
+                    new_special = Special(self.game)
+                    new_special.rect.x += 13 * off_horz
+                    new_special.rect.y += 13 * off_vert
+                    self.specials.add(new_special)
+                    self.parent_specials.add(new_special)
                 elif e == 'P':
                     new_portal = Portal(self.game)
                     new_portal.rect.x += 13 * off_horz

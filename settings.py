@@ -19,13 +19,17 @@ class Settings():
     
     def init_speeds(self):
         self.pac_speed = 1
-        
+
+    def increase_difficulty(self):
+        self.pac_speed += 1
+
     def init_traits(self):
         self.pac_start_x = 300
         self.pac_start_y = 500
         self.pac_size = 27
         self.bar_size = 15
         self.frt_size = 9
+        self.spc_size = 20
         self.pill_size = 20
         self.ghost_size = 27
         self.shld_size = 5
@@ -35,3 +39,4 @@ class Settings():
     def init_points(self):
         self.fruit_points = 1
         self.pill_points = 10
+        self.special_points = 20

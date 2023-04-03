@@ -40,8 +40,15 @@ class Pacman:
 
     def update(self):
         self.posn += self.v
-        self.rotate()
+        
+        # tunnel 1
+        if self.posn.x < 14:
+            self.posn = Vector(580, self.posn.y)
+        # tunnel 2
+        elif self.posn.x > 600: 
+            self.posn = Vector(20, self.posn.y)
         self.posn, self.rect = Util.clamp(posn=self.posn, rect=self.rect, settings=self.settings)
+        self.rotate()
         self.draw()
 
     def draw(self): 

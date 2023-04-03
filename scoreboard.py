@@ -50,6 +50,8 @@ class Scoreboard:
     def increment_score(self, type="fruit"): 
         if type == "pill":
             self.score += self.settings.pill_points
+        elif type == "special":
+            self.score += self.settings.special_points
         else:
             self.score += self.settings.fruit_points
         self.prep_score()
