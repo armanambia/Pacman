@@ -47,8 +47,11 @@ class Scoreboard:
             self.d["hs_3_level"] = self.level
 
 
-    def increment_score(self): 
-        self.score += self.settings.fruit_points
+    def increment_score(self, type="fruit"): 
+        if type == "pill":
+            self.score += self.settings.pill_points
+        else:
+            self.score += self.settings.fruit_points
         self.prep_score()
     
     def next_level(self):

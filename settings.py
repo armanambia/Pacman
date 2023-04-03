@@ -26,9 +26,12 @@ class Settings():
         self.pac_size = 27
         self.bar_size = 15
         self.frt_size = 9
+        self.pill_size = 20
+        self.ghost_size = 27
         self.shld_size = 5
         self.shld_off_x = 5
         self.shld_off_y = 5
 
     def init_points(self):
         self.fruit_points = 1
+        self.pill_points = 10

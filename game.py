@@ -34,7 +34,7 @@ class Game:
         pg.init()
         self.settings = Settings()
         self.disk = shelve.open('score.txt')
-        
+
         size = self.settings.screen_width, self.settings.screen_height  # tuple
         self.screen = pg.display.set_mode(size=size)
         self.maze = Maze(game=self)
@@ -47,7 +47,7 @@ class Game:
         
         pg.display.set_caption("Pacman Portal")
 
-        self.sound = Sound(bg_music="sounds/startrek.wav")
+        self.sound = Sound()
         self.launch = Launch(game=self)
         self.hs = HighScore(game=self)
         self.scoreboard = Scoreboard(game=self)
@@ -110,6 +110,7 @@ class Game:
         if button_clicked:
             self.settings.init_speeds()
             self.sound.play_bg()
+
             pg.mouse.set_visible(False)
 
             self.scoreboard.reset()
@@ -119,11 +120,9 @@ class Game:
             
 
     def update_screen(self):
-
         if not self.settings.game_active:
             # self.space_text.draw_button()
             # self.invaders_text.draw_button()
-            self.sound.stop_bg()
             if self.settings.hs_active:
                 self.hs.update()
                 self.back_button.draw_button()
@@ -134,6 +133,7 @@ class Game:
 
     def play(self):
         # self.sound.play_bg()
+        self.sound.play_start()
         while True:
             self.handle_events()
             self.screen.fill(self.settings.bg_color)

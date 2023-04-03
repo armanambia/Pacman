@@ -5,6 +5,7 @@ from fruit import Fruit
 from portal import Portal
 from shield import Shield
 from vector import Vector
+from powerpill import Powerpill
 
 
 class Maze:
@@ -13,6 +14,8 @@ class Maze:
         self.screen = game.screen
         self.barriers = Group()
         self.fruits = Group()
+        self.pills = Group()
+        self.parent_pills = Group()
         self.parent_fruits = Group()
         self.shields = Group()
         self.portals = Group()
@@ -28,6 +31,8 @@ class Maze:
         for e in self.shields:
             e.draw()
         for e in self.fruits:
+            e.draw()
+        for e in self.pills:
             e.draw()
         for e in self.portals:
             e.draw()
@@ -48,8 +53,13 @@ class Maze:
             if pg.sprite.collide_rect(self.game.pacman, fruit):
                 (self.fruits).remove(fruit)
                 self.game.scoreboard.increment_score()
-        if not self.fruits:
+        for pill in self.pills:
+            if pg.sprite.collide_rect(self.game.pacman, pill):
+                (self.pills).remove(pill)
+                self.game.scoreboard.increment_score("pill")
+        if not self.fruits and not self.pills:
             self.fruits = self.parent_fruits.copy()
+            self.pills = self.parent_pills.copy()
             self.game.scoreboard.next_level()
             self.game.pacman.init_position()
     
@@ -117,7 +127,11 @@ class Maze:
                     new_shield.rect.y += 13 * off_vert
                     self.shields.add(new_shield)
                 elif e == 'h':
-                    pass
+                    new_pill = Powerpill(self.game)
+                    new_pill.rect.x += 13 * off_horz
+                    new_pill.rect.y += 13 * off_vert
+                    self.pills.add(new_pill)
+                    self.parent_pills.add(new_pill)
                 elif e == 'P':
                     new_portal = Portal(self.game)
                     new_portal.rect.x += 13 * off_horz
