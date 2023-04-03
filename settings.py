@@ -11,9 +11,11 @@ class Settings():
     
 
     def init_system(self):
-        self.screen_width = 600 # 46 x 13 + 2
+        self.screen_width = 800 # 46 x 13 + 2 + 200
         self.screen_height = 666 # 51 x 13 + 3
         self.bg_color = (0, 0, 0)
+        self.game_active = False
+        self.hs_active = False
     
     def init_speeds(self):
         self.pac_speed = 1
